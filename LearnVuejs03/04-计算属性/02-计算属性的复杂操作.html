@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2>总价格: {{totalPrice}}</h2>
+
+  <h2>总价格: {{getTotalPrice()}}</h2>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      books: [
+        {id: 110, name: 'Unix编程艺术', price: 119},
+        {id: 111, name: '代码大全', price: 105},
+        {id: 112, name: '深入理解计算机原理', price: 98},
+        {id: 113, name: '现代操作系统', price: 87},
+      ]
+    },
+    methods: {
+      getTotalPrice: function () {
+        let result = 0
+        for (let i=0; i < this.books.length; i++) {
+          result += this.books[i].price
+        }
+        return result
+      }
+    },
+    computed: {
+      totalPrice: function () {
+        let result = 0
+
+        /* 第一种循环写法---传统的循环写法 */
+        // for (let i=0; i < this.books.length; i++) {
+        //   result += this.books[i].price
+        // }
+        // return result
+
+        /* for...in循环是为了遍历对象而设计的，并不适合遍历数组
+        赋给index的值不是实际的数字，而是字符串“0”、“1”、“2”，此时很可能在无意之间进行字符串算数计算，例如：“2” + 1 == “21”，这给编码过程带来极大的不便
+        */
+        /* 第二种循环的写法，但是数据的情况不建议这么写 */
+        // for (let i in this.books) {
+        //   result += this.books[i].price
+        // }
+        // return result
+        
+        /* for-of循环获取到的直接就是一个对象 */
+        /* 第三种循环的写法，建议这么写，这个是ES6中的语法 */
+        for (let  book of this.books) {
+          result += book.price
+        }
+        return result 
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

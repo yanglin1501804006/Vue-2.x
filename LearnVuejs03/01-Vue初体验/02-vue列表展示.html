@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <ul>
+      <li v-for="item in books">{{item}}</li>
+    </ul>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'welcome to Vue !',
+        books: ['三国演义', '西游记', '水浒传', '金瓶梅']
+      }
+    })
+  </script>
+
+</body>
+
+</html>
